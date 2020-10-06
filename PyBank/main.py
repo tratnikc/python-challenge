@@ -28,6 +28,8 @@ greatest_decrease = 0
 increase_month = ""
 decrease_month = ""
 
+results = []
+
 def average_change(numbers):
     length = len(numbers)
     total = 0
@@ -69,22 +71,44 @@ with open(budget_csv) as csvfile:
         previous_record = row
 
 #print(f"length of changes list {len(changes)}")
-print(f"Total Months: {ctr}") #total number of months included in the data set
-print(f"Total: {net_total}") #net total amount of "Profit/Losses"
-print(f"Average  Change: {average_change(changes)}") # average change
+
+header = "Financial Analysis"
+separator = "-------------------------------"
+total_months_line = f"Total Months: {ctr}"
+total_net_line = f"Total: {net_total}"
+average_line = f"Average  Change: {average_change(changes)}"
+
+print(f"{header}")
+print(f"{separator}")
+print(total_months_line)
+print(total_net_line)
+
+#print(f"Total Months: {ctr}") #total number of months included in the data set
+#print(f"Total: {net_total}") #net total amount of "Profit/Losses"
+#print(f"Average  Change: {average_change(changes)}") # average change
 
 greatest_increase = max_change(changes)
 change_index = changes.index(greatest_increase)
 increase_month = months[change_index]
-print(f"Greatest Increase in Profits: {increase_month} {greatest_increase}")
- 
+greatest_increase_line = f"Greatest Increase in Profits: {increase_month} (${greatest_increase})"
+print(greatest_increase_line)
+#print(f"Greatest Increase in Profits: {increase_month} {greatest_increase}")
+
 greatest_decrease = min_change(changes)
 change_index = changes.index(greatest_decrease)
 decrease_month = months[change_index]
-print(f"Greatest Decrease in Profits: {decrease_month} {greatest_decrease}")
+greatest_decrease_line = f"Greatest Decrease in Profits: {decrease_month} (${greatest_decrease})"
+print(greatest_decrease_line)
 
-cleaned_file = zip(months,changes)
-output_file = os.path.join("output.csv")
+results.append(header)
+results.append(separator)
+results.append(total_months_line)
+results.append(total_net_line)
+results.append(greatest_increase_line)
+results.append(greatest_decrease_line)
+
+cleaned_file = zip(results)
+output_file = os.path.join("output.txt")
 with open(output_file, "w", newline='') as datafile:
     writer = csv.writer(datafile)
     writer.writerows(cleaned_file)
