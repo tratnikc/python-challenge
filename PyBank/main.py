@@ -25,6 +25,9 @@ monthly_change = 0
 greatest_increase = 0
 greatest_decrease = 0
 
+increase_month = ""
+decrease_month = ""
+
 def average_change(numbers):
     length = len(numbers)
     total = 0
@@ -72,7 +75,14 @@ print("net total " + str(net_total)) #net total amount of "Profit/Losses"
 
 print(f"average = {average_change(changes)}") # average change
 
-print(f"largest {max_change(changes)}")
+greatest_increase = max_change(changes)
+print(f"greatest increase = {greatest_increase}")
+
+increase_index = changes.index(greatest_increase)
+print(f"increase index = {increase_index}")
+
+increase_month = months[increase_index]
+print(f"increase month = {increase_month}")
  
 cleaned_file = zip(months,changes)
 output_file = os.path.join("output.csv")
