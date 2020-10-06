@@ -108,7 +108,7 @@ results.append(greatest_increase_line)
 results.append(greatest_decrease_line)
 
 cleaned_file = zip(results)
-output_file = os.path.join("output.txt")
+output_file = os.path.join("Analysis", "output.txt")
 with open(output_file, "w", newline='') as datafile:
     writer = csv.writer(datafile)
     writer.writerows(cleaned_file)
