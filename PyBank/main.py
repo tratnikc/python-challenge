@@ -43,6 +43,14 @@ def max_change(numbers):
             largest = numbers[i]
     return largest
 
+def min_change(numbers):
+    smallest = 0
+
+    for i in range(len(numbers)):
+        if int(numbers[i]) < smallest:
+            smallest = numbers[i]
+    return smallest
+
 # open file
 with open(budget_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
@@ -76,14 +84,15 @@ print("net total " + str(net_total)) #net total amount of "Profit/Losses"
 print(f"average = {average_change(changes)}") # average change
 
 greatest_increase = max_change(changes)
-print(f"greatest increase = {greatest_increase}")
-
-increase_index = changes.index(greatest_increase)
-print(f"increase index = {increase_index}")
-
-increase_month = months[increase_index]
-print(f"increase month = {increase_month}")
+change_index = changes.index(greatest_increase)
+increase_month = months[change_index]
+print(f"Greatest Increase in Profits: {increase_month} {greatest_increase}")
  
+greatest_decrease = min_change(changes)
+change_index = changes.index(greatest_decrease)
+decrease_month = months[change_index]
+print(f"Greatest Decrease in Profits: {decrease_month} {greatest_decrease}")
+
 cleaned_file = zip(months,changes)
 output_file = os.path.join("output.csv")
 with open(output_file, "w", newline='') as datafile:
