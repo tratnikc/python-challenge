@@ -1,12 +1,12 @@
-# open file
+# open budget file
 # get total number of months
 # get net total amount of "Profit/Losses" over entire period
 # change = current - previous
 # average_change = sum all change/number of changes
-# greatest increase in profit: max(change) where change > 0
-# greatest decrease in losses: min(change) where change < 0
+# greatest increase in profit: max(change) 
+# greatest decrease in losses: min(change)
 # print analysis results to terminal
-# open a file for writing the results
+# open analysis file for writing the results
 
 import os
 import csv
@@ -59,8 +59,6 @@ with open(budget_csv) as csvfile:
     previous_record = next(csvreader)
     ctr += 1
     net_total = int(previous_record[1])
-    print(f"first record  {previous_record}")
-    #print(str(net_total))
 
     for row in csvreader:
         ctr += 1
@@ -69,19 +67,11 @@ with open(budget_csv) as csvfile:
         monthly_change = int(row[1]) - int(previous_record[1])
         changes.append(monthly_change)
         previous_record = row
-        print(f"previous record  {previous_record}")
 
-        
-        change_ctr += 1
-
-        #print(row)
-        #print(row[0] + " " + str(row[1]))
-
-print(f"length of changes list {len(changes)}")
-print(f"total number of months included in the data set {ctr}") #total number of months included in the data set
-print("net total " + str(net_total)) #net total amount of "Profit/Losses"
-
-print(f"average = {average_change(changes)}") # average change
+#print(f"length of changes list {len(changes)}")
+print(f"Total Months: {ctr}") #total number of months included in the data set
+print(f"Total: {net_total}") #net total amount of "Profit/Losses"
+print(f"Average  Change: {average_change(changes)}") # average change
 
 greatest_increase = max_change(changes)
 change_index = changes.index(greatest_increase)
@@ -98,9 +88,3 @@ output_file = os.path.join("output.csv")
 with open(output_file, "w", newline='') as datafile:
     writer = csv.writer(datafile)
     writer.writerows(cleaned_file)
-
-        # print(f"{changes[x]}")
-
-
-#print(months)
-#print(f"{months} {str(monthly_change)} ")
