@@ -32,6 +32,14 @@ def average_change(numbers):
         total += number
     return total / length 
 
+def max_change(numbers):
+    largest = 0
+
+    for i in range(len(numbers)):
+        if int(numbers[i]) > largest:
+            largest = numbers[i]
+    return largest
+
 # open file
 with open(budget_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
@@ -62,7 +70,9 @@ print(f"length of changes list {len(changes)}")
 print(f"total number of months included in the data set {ctr}") #total number of months included in the data set
 print("net total " + str(net_total)) #net total amount of "Profit/Losses"
 
-print(f"average = {average_change(changes)}")
+print(f"average = {average_change(changes)}") # average change
+
+print(f"largest {max_change(changes)}")
  
 cleaned_file = zip(months,changes)
 output_file = os.path.join("output.csv")
