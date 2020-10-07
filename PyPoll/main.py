@@ -6,23 +6,44 @@ import os
 import csv
 
 election_results = []
+candidates = []
 total_votes = 0
+
+def percentage_vote(counts):
+    pct = 0
+    pct = counts / total_votes
+    return pct 
+
+def tally_votes():
+    ctr = 0
+    for running_man in candidates:
+        ctr += 1
+        print(f"{ctr} {running_man} {election_results.count(running_man)}")
 
 # path to collect data from Resources folder
 votes_csv = os.path.join("Resources", "election_data.csv")
 
-#check for duplicate votes
 with open(votes_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
     for row in csvreader:
         election_results.append(row[2])
+        #if candidates.count(row[2]) == 0:
+        #    candidates.append(row[2])
 
+candidates = set(election_results)
+print(candidates)
+
+tally_votes()
+
+
+print("---------------------")
 total_votes = len(election_results)
 khan_votes = election_results.count("Khan")
 correy_votes = election_results.count("Correy")
 li_votes = election_results.count("Li")
 otooley_votes = election_results.count("O'Tooley")
+
 
 print(f"Total Votes: {total_votes}")
 print(f"Khan: {khan_votes}")
