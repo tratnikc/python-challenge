@@ -7,18 +7,23 @@ import csv
 
 election_results = []
 candidates = []
+candidate_votes = {}
 total_votes = 0
 
 def percentage_vote(counts):
     pct = 0
-    pct = counts / total_votes
-    return pct 
+    pct = (counts / total_votes) * 100
+    return format(pct, '.3f') + '%'
 
 def tally_votes():
-    ctr = 0
+    vote_count = 0
+    vote_pct = 0
     for running_man in candidates:
-        ctr += 1
-        print(f"{ctr} {running_man} {election_results.count(running_man)}")
+        vote_count = election_results.count(running_man)
+        vote_pct = percentage_vote(vote_count)
+        #print(f"{vote_pct}")
+        candidate_votes.update({running_man : [vote_pct, vote_count]}) 
+        #print(f"{running_man}: ({election_results.count(running_man)})")
 
 # path to collect data from Resources folder
 votes_csv = os.path.join("Resources", "election_data.csv")
@@ -32,13 +37,13 @@ with open(votes_csv) as csvfile:
         #    candidates.append(row[2])
 
 candidates = set(election_results)
-print(candidates)
+total_votes = len(election_results)
 
 tally_votes()
-
+print(candidate_votes)
 
 print("---------------------")
-total_votes = len(election_results)
+
 khan_votes = election_results.count("Khan")
 correy_votes = election_results.count("Correy")
 li_votes = election_results.count("Li")
