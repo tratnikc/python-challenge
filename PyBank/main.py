@@ -35,7 +35,7 @@ def average_change(numbers):
     total = 0
     for number in numbers:
         total += number
-    return total / length 
+    return format((total / length), '.2f') 
 
 def max_change(numbers):
     largest = 0
@@ -75,13 +75,14 @@ with open(budget_csv) as csvfile:
 header = "Financial Analysis"
 separator = "-------------------------------"
 total_months_line = f"Total Months: {ctr}"
-total_net_line = f"Total: {net_total}"
-average_line = f"Average  Change: {average_change(changes)}"
+total_net_line = f"Total: ${net_total}"
+average_line = f"Average  Change: ${average_change(changes)}"
 
 print(f"{header}")
 print(f"{separator}")
 print(total_months_line)
 print(total_net_line)
+print(average_line)
 
 #print(f"Total Months: {ctr}") #total number of months included in the data set
 #print(f"Total: {net_total}") #net total amount of "Profit/Losses"
@@ -104,6 +105,7 @@ results.append(header)
 results.append(separator)
 results.append(total_months_line)
 results.append(total_net_line)
+results.append(average_line)
 results.append(greatest_increase_line)
 results.append(greatest_decrease_line)
 
