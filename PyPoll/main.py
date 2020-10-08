@@ -7,7 +7,6 @@ import csv
 
 election_results = []
 candidates = []
-candidate_votes = {}
 tally_results = []
 poll_results = []
 total_votes = 0
@@ -23,10 +22,7 @@ def tally_votes():
     for running_man in candidates:
         vote_count = election_results.count(running_man)
         vote_pct = percentage_vote(vote_count)
-        candidate_votes = {"name" : running_man,
-                            "vote_pct" : vote_pct,
-                            "vote_count" : vote_count}
-        tally_results.append(candidate_votes)
+        tally_results.append((running_man, vote_pct, vote_count))
 
 # path to collect data from Resources folder
 votes_csv = os.path.join("Resources", "election_data.csv")
@@ -49,12 +45,12 @@ total_votes = len(election_results)
 tally_votes()
 
 #sort to get the candidate with the most number of votes
-sorted_results = sorted(tally_results, key=lambda item:item['vote_count'], reverse=True)
+sorted_results = sorted(tally_results, key=lambda item:item[2], reverse=True)
 
 header = "Election Results"
 separator = "--------------------------"
 total_line = f"Total Votes: {total_votes}"
-winner_line = f"Winner: {sorted_results[0]['name']}"
+winner_line = f"Winner: {sorted_results[0][0]}"
 
 poll_results.append(header)
 poll_results.append(separator)
@@ -62,7 +58,7 @@ poll_results.append(total_line)
 poll_results.append(separator)
 
 for line in sorted_results:
-    stats_line = f"{line['name']}: {line['vote_pct']} ({line['vote_count']})"
+    stats_line = f"{line[0]}: {line[1]} ({line[2]})"
     poll_results.append(stats_line)
 
 poll_results.append(separator)
