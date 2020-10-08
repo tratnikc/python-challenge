@@ -35,6 +35,9 @@ Winner of the election based on popular vote
 Read data file
 Calculate month-over-change in Profits/Losses
 Based on changes data, calculate Average Change, Greatest Increase in Profits, Greatest Decrease in Profits
-Write analysis report
+Write analysis report to a text file
 ### PyPoll
-
+Read election data
+Tally votes per candidate
+Determine winner
+Write election data analysis to a text file
