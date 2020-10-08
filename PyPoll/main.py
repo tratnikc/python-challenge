@@ -12,7 +12,6 @@ tally_results = []
 poll_results = []
 total_votes = 0
 
-
 def percentage_vote(counts):
     pct = 0
     pct = (counts / total_votes) * 100
@@ -38,34 +37,45 @@ with open(votes_csv) as csvfile:
     for row in csvreader:
         election_results.append(row[2])
 
+#list of candidate names
 candidates = set(election_results)
+
+#total number of votes cast
 total_votes = len(election_results)
+
+#names of candidates
+#total number of votes each candidate won
+#percentage of votes each candidate won
 tally_votes()
 
+#sort to get the candidate with the most number of votes
 sorted_results = sorted(tally_results, key=lambda item:item['vote_count'], reverse=True)
 
-print(sorted_results[0]["name"])
-
 header = "Election Results"
-separator = "-----------------------"
+separator = "--------------------------"
 total_line = f"Total Votes: {total_votes}"
+winner_line = f"Winner: {sorted_results[0]['name']}"
+
+poll_results.append(header)
+poll_results.append(separator)
+poll_results.append(total_line)
+poll_results.append(separator)
+
 for line in sorted_results:
-    print(line["name"])
+    stats_line = f"{line['name']}: {line['vote_pct']} ({line['vote_count']})"
+    poll_results.append(stats_line)
 
+poll_results.append(separator)
+poll_results.append(winner_line)
+poll_results.append(separator)
 
+#write output file in Analysis folder
+cleaned_file = zip(poll_results)
+output_file = os.path.join("Analysis","output.txt")
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile)
+    writer.writerows(cleaned_file)
 
-"""
-khan_votes = election_results.count("Khan")
-correy_votes = election_results.count("Correy")
-li_votes = election_results.count("Li")
-otooley_votes = election_results.count("O'Tooley")
-
-
-print(f"Total Votes: {total_votes}")
-print(f"Khan: {khan_votes}")
-print(f"Correy: {correy_votes}")
-print(f"Li: {li_votes}")
-print(f"O'Tooley: {otooley_votes}")
-"""    
-
-
+#print results to terminal
+for row in poll_results:
+    print(row)

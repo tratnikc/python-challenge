@@ -70,36 +70,21 @@ with open(budget_csv) as csvfile:
         changes.append(monthly_change)
         previous_record = row
 
-#print(f"length of changes list {len(changes)}")
-
 header = "Financial Analysis"
 separator = "-------------------------------"
 total_months_line = f"Total Months: {ctr}"
 total_net_line = f"Total: ${net_total}"
 average_line = f"Average  Change: ${average_change(changes)}"
 
-print(f"{header}")
-print(f"{separator}")
-print(total_months_line)
-print(total_net_line)
-print(average_line)
-
-#print(f"Total Months: {ctr}") #total number of months included in the data set
-#print(f"Total: {net_total}") #net total amount of "Profit/Losses"
-#print(f"Average  Change: {average_change(changes)}") # average change
-
 greatest_increase = max_change(changes)
 change_index = changes.index(greatest_increase)
 increase_month = months[change_index]
 greatest_increase_line = f"Greatest Increase in Profits: {increase_month} (${greatest_increase})"
-print(greatest_increase_line)
-#print(f"Greatest Increase in Profits: {increase_month} {greatest_increase}")
 
 greatest_decrease = min_change(changes)
 change_index = changes.index(greatest_decrease)
 decrease_month = months[change_index]
 greatest_decrease_line = f"Greatest Decrease in Profits: {decrease_month} (${greatest_decrease})"
-print(greatest_decrease_line)
 
 results.append(header)
 results.append(separator)
@@ -114,3 +99,6 @@ output_file = os.path.join("Analysis", "output.txt")
 with open(output_file, "w", newline='') as datafile:
     writer = csv.writer(datafile)
     writer.writerows(cleaned_file)
+
+for row in results:
+    print(row)
