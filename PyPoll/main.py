@@ -1,6 +1,8 @@
-#open election data file
-#get total number of votes cast
-#list of candidates who received votes
+# open election data file
+# get total number of votes cast
+# list of candidates who received votes
+# get total number of votes and percentages each candidate received
+# list the winner of the election based on popular vote
 
 import os
 import csv
@@ -47,6 +49,7 @@ tally_votes()
 #sort to get the candidate with the most number of votes
 sorted_results = sorted(tally_results, key=lambda item:item[2], reverse=True)
 
+# prepare analysis report
 header = "Election Results"
 separator = "--------------------------"
 total_line = f"Total Votes: {total_votes}"
