@@ -6,9 +6,8 @@ this README.md
 ## PyBank
 ### included:
 1. main.py
-2. output.cvs - data with two columns (date and changes)
-3. budget_data.csv - financial data in Resources folder
-4. output.txt - analysis report in Analysis folder
+2. budget_data.csv - financial data in Resources folder
+3. output.txt - analysis report in Analysis folder
 [analysis results](https://github.com/tratnikc/python-challenge/blob/main/PyBank/Analysis/output.txt)
 
 ### Requirements:
