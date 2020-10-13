@@ -29,7 +29,8 @@ Write analysis report to a text file
 ### included:
 1. main.py
 2. election_data.csv in Resources folder
-3. output.txt - analysis report in Analysis folder
+3. output.txt - analysis report in Analysis folder  
+[analysis results](https://github.com/tratnikc/python-challenge/blob/main/PyPoll/Analysis/output.txt)
 
 
 ### Requirements:
