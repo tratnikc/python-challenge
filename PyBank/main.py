@@ -2,11 +2,11 @@
 # get total number of months
 # get net total amount of "Profit/Losses" over entire period
 # change = current - previous
-# average_change = sum all change/number of changes
+# average_change = sum all change/number of months changes
 # greatest increase in profit: max(change) 
 # greatest decrease in losses: min(change)
-# print analysis results to terminal
 # open analysis file for writing the results
+# print analysis results to terminal
 
 import os
 import csv
@@ -54,6 +54,7 @@ def min_change(numbers):
     return smallest
 
 # open file
+# calculate monthly changes
 with open(budget_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
@@ -70,17 +71,21 @@ with open(budget_csv) as csvfile:
         changes.append(monthly_change)
         previous_record = row
 
+# prepare analysis report
+# calculate total net, total months, average change
 header = "Financial Analysis"
 separator = "-------------------------------"
 total_months_line = f"Total Months: {ctr}"
 total_net_line = f"Total: ${net_total}"
 average_line = f"Average  Change: ${average_change(changes)}"
 
+# calculate greatest increase in Profits/Losses
 greatest_increase = max_change(changes)
 change_index = changes.index(greatest_increase)
 increase_month = months[change_index]
 greatest_increase_line = f"Greatest Increase in Profits: {increase_month} (${greatest_increase})"
 
+# calculate greatest decrease in Profits/Losses
 greatest_decrease = min_change(changes)
 change_index = changes.index(greatest_decrease)
 decrease_month = months[change_index]
@@ -94,11 +99,13 @@ results.append(average_line)
 results.append(greatest_increase_line)
 results.append(greatest_decrease_line)
 
+# write analysis to text file in Analysis folder
 cleaned_file = zip(results)
 output_file = os.path.join("Analysis", "output.txt")
 with open(output_file, "w", newline='') as datafile:
     writer = csv.writer(datafile)
     writer.writerows(cleaned_file)
 
+# print analysis to terminal
 for row in results:
     print(row)
