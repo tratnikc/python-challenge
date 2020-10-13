@@ -20,7 +20,7 @@ Greatest decrease in losses (date and amount) over the entire period
 
 ### Algorithm:
 Read data file  
-Calculate month-over-change in Profits/Losses  
+Calculate month-over-month change in Profits/Losses  
 Based on changes data, calculate Average Change, Greatest Increase in Profits, Greatest Decrease in Profits  
 Write analysis report to a text file  
 
@@ -29,7 +29,7 @@ Write analysis report to a text file
 ### included:
 1. main.py
 2. election_data.csv in Resources folder
-3. output.txt - analysis report in Analysis folder  
+3. output.txt - analysis report in Analysis folder 
 [analysis results](https://github.com/tratnikc/python-challenge/blob/main/PyPoll/Analysis/output.txt)
 
 
